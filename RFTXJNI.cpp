@@ -18,22 +18,26 @@ jstring charTojstring(JNIEnv* env, const char* pat)
 	//将byte数组转换为java String,并输出
 	return (jstring)(env)->NewObject(strClass, ctorID, bytes, encoding);
 }
-JNIEXPORT jchar JNICALL Java_jni_JniInterface_getch
-(JNIEnv * env, jclass cls) {
-	char b[3];
-	b[0] = _getch();
-	b[1] = _getch();
-	b[2] = '\0';
-	cout << b[0] << b[1] << b[2];
-	return b[0] << b[1] << b[2];
+static bool debugMode = false;
+
+
+JNIEXPORT void JNICALL Java_jni_JniInterface_setDebugMode
+(JNIEnv *env, jclass cls, jboolean debug) {
+	debugMode = debug;
 }
+
 JNIEXPORT jstring JNICALL Java_jni_JniInterface_getstr
 (JNIEnv* env, jclass cls) {
 	char b[3];
 	b[0] = _getch();
-	printf("%d", b[0]);
+	if(debugMode)
+		printf("%d ", b[0]);
 	if (b[0] > 127||b[0]<0) {
 		b[1] = _getch();
+		if (debugMode)
+		{
+			printf("%d", b[1]);
+		}
 		b[2] = '\0';
 	}
 	else {

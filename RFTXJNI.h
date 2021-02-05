@@ -9,19 +9,19 @@ extern "C" {
 #endif
 	/*
 	 * Class:     jni_JniInterface
-	 * Method:    getch
-	 * Signature: ()C
-	 */
-	JNIEXPORT jchar JNICALL Java_jni_JniInterface_getch
-	(JNIEnv*, jclass);
-
-	/*
-	 * Class:     jni_JniInterface
 	 * Method:    getstr
 	 * Signature: ()Ljava/lang/String;
 	 */
 	JNIEXPORT jstring JNICALL Java_jni_JniInterface_getstr
 	(JNIEnv*, jclass);
+
+	/*
+	 * Class:     jni_JniInterface
+	 * Method:    setDebugMode
+	 * Signature: (Z)V
+	 */
+	JNIEXPORT void JNICALL Java_jni_JniInterface_setDebugMode
+	(JNIEnv*, jclass, jboolean);
 
 #ifdef __cplusplus
 }
